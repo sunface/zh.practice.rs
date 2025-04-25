@@ -1,0 +1,373 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>数值类型 - Rust By Practice( Rust 练习实践 )</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="Learning Rust By Practice, narrowing the gap between beginner and skilled-dev with challenging examples, exercises and projects.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/style1.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Rust By Practice( Rust 练习实践 )</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/sunface/rust-by-practice" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/sunface/rust-by-practice/edit/master/zh-CN/src/basic-types/numbers.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="数值类型"><a class="header" href="#数值类型">数值类型</a></h1>
+<h3 id="整数"><a class="header" href="#整数">整数</a></h3>
+<ol>
+<li>🌟</li>
+</ol>
+<blockquote>
+<p>Tips: 如果我们没有显式的给予变量一个类型，那编译器会自动帮我们推导一个类型</p>
+</blockquote>
+<pre><pre class="playground"><code class="language-rust editable edition2018">
+// 移除某个部分让代码工作
+fn main() {
+    let x: i32 = 5;
+    let mut y: u32 = 5;
+
+    y = x;
+    
+    let z = 10; // 这里 z 的类型是? 
+}</code></pre></pre>
+<ol start="2">
+<li>🌟</li>
+</ol>
+<pre><pre class="playground"><code class="language-rust editable edition2018">
+// 填空
+fn main() {
+    let v: u16 = 38_u8 as __;
+}</code></pre></pre>
+<ol start="3">
+<li>🌟🌟🌟</li>
+</ol>
+<blockquote>
+<p>Tips: 如果我们没有显式的给予变量一个类型，那编译器会自动帮我们推导一个类型</p>
+</blockquote>
+<pre><pre class="playground"><code class="language-rust editable edition2018">
+// 修改 `assert_eq!` 让代码工作
+fn main() {
+    let x = 5;
+    assert_eq!("u32".to_string(), type_of(&amp;x));
+}
+
+// 以下函数可以获取传入参数的类型，并返回类型的字符串形式，例如  "i8", "u8", "i32", "u32"
+fn type_of&lt;T&gt;(_: &amp;T) -&gt; String {
+    format!("{}", std::any::type_name::&lt;T&gt;())
+}</code></pre></pre>
+<ol start="4">
+<li>🌟🌟</li>
+</ol>
+<pre><pre class="playground"><code class="language-rust editable edition2018">
+// 填空，让代码工作
+fn main() {
+    assert_eq!(i8::MAX, __); 
+    assert_eq!(u8::MAX, __); 
+}</code></pre></pre>
+<ol start="5">
+<li>🌟🌟</li>
+</ol>
+<pre><pre class="playground"><code class="language-rust editable edition2018">
+// 解决代码中的错误和 `panic`
+fn main() {
+   let v1 = 251_u8 + 8;
+   let v2 = i8::checked_add(251, 8).unwrap();
+   println!("{},{}",v1,v2);
+}</code></pre></pre>
+<ol start="6">
+<li>🌟🌟</li>
+</ol>
+<pre><pre class="playground"><code class="language-rust editable edition2018">
+// 修改 `assert!` 让代码工作
+fn main() {
+    let v = 1_024 + 0xff + 0o77 + 0b1111_1111;
+    assert!(v == 1579);
+}</code></pre></pre>
+<h3 id="浮点数"><a class="header" href="#浮点数">浮点数</a></h3>
+<ol start="7">
+<li>🌟</li>
+</ol>
+<pre><pre class="playground"><code class="language-rust editable edition2018">
+// 将 ? 替换成你的答案
+fn main() {
+    let x = 1_000.000_1; // ?
+    let y: f32 = 0.12; // f32
+    let z = 0.01_f64; // f64
+}</code></pre></pre>
+<ol start="8">
+<li>🌟🌟 使用两种方法来让下面代码工作</li>
+</ol>
+<pre><pre class="playground"><code class="language-rust editable edition2018">
+fn main() {
+    assert!(0.1+0.2==0.3);
+}</code></pre></pre>
+<h3 id="序列range"><a class="header" href="#序列range">序列Range</a></h3>
+<ol start="9">
+<li>🌟🌟 两个目标: 1. 修改 <code>assert!</code> 让它工作 2. 让 <code>println!</code> 输出: 97 - 122</li>
+</ol>
+<pre><pre class="playground"><code class="language-rust editable edition2018">fn main() {
+    let mut sum = 0;
+    for i in -3..2 {
+        sum += i
+    }
+
+    assert!(sum == -3);
+
+    for c in 'a'..='z' {
+        println!("{}",c);
+    }
+}</code></pre></pre>
+<ol start="10">
+<li>🌟🌟</li>
+</ol>
+<pre><pre class="playground"><code class="language-rust editable edition2018">
+// 填空
+use std::ops::{Range, RangeInclusive};
+fn main() {
+    assert_eq!((1..__), Range{ start: 1, end: 5 });
+    assert_eq!((1..__), RangeInclusive::new(1, 5));
+}</code></pre></pre>
+<h3 id="计算"><a class="header" href="#计算">计算</a></h3>
+<ol start="11">
+<li>🌟</li>
+</ol>
+<pre><pre class="playground"><code class="language-rust editable edition2018">
+// 填空，并解决错误
+fn main() {
+    // 整数加法
+    assert!(1u32 + 2 == __);
+
+    // 整数减法
+    assert!(1i32 - 2 == __);
+    assert!(1u8 - 2 == -1);
+    
+    assert!(3 * 50 == __);
+
+    assert!(9.6 / 3.2 == 3.0); // error ! 修改它让代码工作
+
+    assert!(24 % 5 == __);
+    
+    // 逻辑与或非操作
+    assert!(true &amp;&amp; false == __);
+    assert!(true || false == __);
+    assert!(!true == __);
+
+    // 位操作
+    println!("0011 AND 0101 is {:04b}", 0b0011u32 &amp; 0b0101);
+    println!("0011 OR 0101 is {:04b}", 0b0011u32 | 0b0101);
+    println!("0011 XOR 0101 is {:04b}", 0b0011u32 ^ 0b0101);
+    println!("1 &lt;&lt; 5 is {}", 1u32 &lt;&lt; 5);
+    println!("0x80 &gt;&gt; 2 is 0x{:x}", 0x80u32 &gt;&gt; 2);
+}</code></pre></pre>
+<blockquote>
+<p>你可以在<a href="https://github.com/sunface/rust-by-practice/blob/master/solutions/basic-types/numbers.md">这里</a>找到答案(在 solutions 路径下)</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../basic-types/intro.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../basic-types/char-bool-unit.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../basic-types/intro.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../basic-types/char-bool-unit.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+        <script src="../ace.js"></script>
+        <script src="../editor.js"></script>
+        <script src="../mode-rust.js"></script>
+        <script src="../theme-dawn.js"></script>
+        <script src="../theme-tomorrow_night.js"></script>
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../assets/custom3.js"></script>
+        <script src="../assets/lang1.js"></script>
+
+
+    </div>
+    </body>
+</html>

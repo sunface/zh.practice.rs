@@ -1,0 +1,265 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>关于 practice.rs - Rust By Practice( Rust 练习实践 )</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="Learning Rust By Practice, narrowing the gap between beginner and skilled-dev with challenging examples, exercises and projects.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="theme/style1.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Rust By Practice( Rust 练习实践 )</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/sunface/rust-by-practice" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/sunface/rust-by-practice/edit/master/zh-CN/src/why-exercise.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 align="center">Rust语言实战</h1>
+<div align="center">
+    <img height="150" src="https://github.com/sunface/rust-by-practice/blob/master/en/assets/logo.png?raw=true">
+</div>
+<p align="center">通过有挑战性的示例、练习题、实践项目来提升 Rust 水平，建立从入门学习到上手实战的直通桥梁</p>
+<div align="center">
+<p><a href="https://github.com/sunface/rust-by-practice/stargazers"><img src="https://img.shields.io/github/stars/sunface/rust-by-practice?style=flat" alt="Stars Count" /></a> <a href="https://github.com/naaive/orange/network/members"><img src="https://img.shields.io/github/forks/sunface/rust-by-practice.svg?style=flat" alt="Forks Count" /></a>
+<a href="https://github.com/sunface/rust-by-practice/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-mit-green?style=flat" alt="LICENSE" /></a></p>
+</div>
+<p><em>Rust语言实战</em> 的目标是通过大量的实战练习帮助大家更好的学习和上手使用 Rust 语言。书中的练习题非常易于使用：你所需的就是在线完成练习，并让它通过编译。</p>
+<h2 id="在线阅读"><a class="header" href="#在线阅读">在线阅读</a></h2>
+<ul>
+<li><a href="https://zh.practice.rs">https://zh.practice.rs</a></li>
+</ul>
+<h2 id="本地运行"><a class="header" href="#本地运行">本地运行</a></h2>
+<p>我们使用 <a href="https://rust-lang.github.io/mdBook/">mdbook</a> 构建在线练习题，你也可以下载到本地运行：</p>
+<pre><code class="language-shell">$ git clone https://github.com/sunface/rust-by-practice
+$ cargo install mdbook
+$ cd rust-by-practice &amp;&amp; mdbook serve zh-CN/
+</code></pre>
+<p>在本地win 10或者linux服务器上运行时，应当使用 -n 参数指定mdbook服务所监听的IP地址（-p 参数指定服务监听的端口，不指定则为默认的3000），以win 10本地运行为例：</p>
+<pre><code class="language-shell">$ mdbook serve -p 8888 -n 127.0.0.1 zh-CN/
+</code></pre>
+<h2 id="特性"><a class="header" href="#特性">特性</a></h2>
+<p>部分示例和习题借鉴了 <a href="https://github.com/rust-lang/rust-by-example">Rust By Example</a>, 书中的示例真的非常棒！</p>
+<p>尽管它们非常优秀，我们这本书也有自己的秘密武器 :)</p>
+<ul>
+<li>
+<p>每个章节分为三个可选部分：示例、练习和实践项目</p>
+</li>
+<li>
+<p>除了示例外，我们还有大量的高质量练习题，你可以在线阅读、修改和编译它们</p>
+</li>
+<li>
+<p>覆盖了 Rust 语言的几乎所有方面：基础语言特性、高级语言特性、async/await 异步编程、多线程、并发原语、性能优化、工具链使用、标准库、数据结构和算法等</p>
+</li>
+<li>
+<p>每一道练习题都提供了解答</p>
+</li>
+<li>
+<p>整体难度相对更高，更加贴近于实战难度: 简单 🌟 , 中等 🌟🌟 , 困难 🌟🌟🌟  , 地狱 🌟🌟🌟🌟</p>
+</li>
+</ul>
+<p><strong>总之，我们想做的就是解决入门学习后，不知道该如何运用的问题，毕竟对于 Rust 来说，从学习到实战，中间还隔着数个 Go语言 的难度</strong></p>
+<h2 id="关于我们"><a class="header" href="#关于我们">关于我们</a></h2>
+<p><em>Rust语言实战</em> 由 Rust 编程学院倾情打造。</p>
+<p>同时我们还提供了一本目前最好也是最用心的开源 Rust 书籍 - <a href="https://github.com/sunface/rust-course">Rust语言圣经</a>， 适合从入门到精通所有阶段的学习，欢迎大家阅读使用。</p>
+<p>对我们来说，来自读者大大的肯定比什么都重要，因此一个 <a href="https://github.com/sunface/rust-by-practice">Github star</a> 要比一杯咖啡更让我们开心，而且现在它在跳楼打折，无需 998 ， 仅需 0 元钱 :)</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+                            <a rel="next prefetch" href="elegant-code-base.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+                    <a rel="next prefetch" href="elegant-code-base.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+        <script src="ace.js"></script>
+        <script src="editor.js"></script>
+        <script src="mode-rust.js"></script>
+        <script src="theme-dawn.js"></script>
+        <script src="theme-tomorrow_night.js"></script>
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="assets/custom3.js"></script>
+        <script src="assets/lang1.js"></script>
+
+
+    </div>
+    </body>
+</html>
